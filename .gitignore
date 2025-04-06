@@ -6,6 +6,7 @@ __pycache__/
 markdowns
 pdfs
 snaps
+reports
 
 # C extensions
 *.so

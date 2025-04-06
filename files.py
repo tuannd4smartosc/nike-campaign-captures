@@ -1,6 +1,10 @@
 from markdown import markdown
 from weasyprint import HTML
 import os
+from PIL import Image
+import io
+import uuid
+import tempfile
 
 def markdown_to_pdf(markdown_text, output_path):
     html_text = markdown(markdown_text, extensions=['markdown.extensions.tables', 'markdown.extensions.extra', 'markdown.extensions.nl2br'])
@@ -33,11 +37,13 @@ def markdown_to_pdf(markdown_text, output_path):
     </body>
     </html>
     """
-    HTML(string=styled_html).write_pdf(output_path)
+    return HTML(string=styled_html).write_pdf(output_path)
     
     
-def export_md(markdown_content, output_filename):
-    os.makedirs("markdowns", exist_ok=True)
-    file_path = os.path.join("markdowns", output_filename)
+    
+def export_md(markdown_content, output_filename, folder_path):
+    os.makedirs(folder_path, exist_ok=True)
+    file_path = os.path.join(folder_path, output_filename)
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(markdown_content)
+  

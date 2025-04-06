@@ -25,11 +25,16 @@ def search_web(query: str, region: str):
 
 
 def scrape_web_page(link: str):
-    url = "https://scrape.serper.dev/"
-    payload = json.dumps({"url": link, "includeMarkdown": True})
-    headers = {
-        'X-API-KEY': os.environ['SERPER_API_KEY'],
-        'content-type': 'application/json'
-    }
-    response = requests.request("POST", url, headers=headers, data=payload)
-    return response.json()
+    try:
+        url = "https://scrape.serper.dev/"
+        payload = json.dumps({"url": link, "includeMarkdown": True})
+        headers = {
+            'X-API-KEY': os.environ['SERPER_API_KEY'],
+            'content-type': 'application/json'
+        }
+        response = requests.request("POST", url, headers=headers, data=payload)
+        return response.json()
+    except Exception:
+        return {
+            "markdown": "*Not found*"
+        }

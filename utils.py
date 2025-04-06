@@ -1,7 +1,5 @@
 import re
 import codecs
-from files import export_md
-import uuid
 import streamlit as st
 
 def clean_markdown(text):
@@ -12,9 +10,11 @@ def clean_markdown(text):
     markdown = codecs.decode(cleaned, 'unicode_escape')
     return markdown
 
-def export_md_with_link(markdown, link):
-    link_md = f"## Reference URL: {link} \n\n"
-    final_md = f"{link_md}{markdown}"
+def export_md_with_extra_markdown(markdown, extra):
+    final_md = f"""
+    \n\n\n\n{extra}\n
+    {markdown}
+    """
     # export_md(final_md, f"snap-{uuid.uuid4().hex}.md")
     return final_md
 
